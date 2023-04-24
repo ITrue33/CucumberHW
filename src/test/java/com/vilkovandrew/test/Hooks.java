@@ -1,19 +1,21 @@
-package com.vilkovandrew;
+package com.vilkovandrew.test;
 
 import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import io.cucumber.java.BeforeAll;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.webdriver;
+
 /**
- * Базовый класс для тестов.
+ * Хуки для настройки окружения перед или после каждого сценария
  *
  * @author Вилков Андрей
  */
-public class BaseTest {
+public class Hooks {
     /**
      * Конфигурирование драйвера перед тестами.
      *
@@ -21,8 +23,8 @@ public class BaseTest {
      * Автор: Вилков Андрей
      * </p>
      */
-    @BeforeEach
-    void beforeTest() {
+    @BeforeAll
+    public static void beforeTest() {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments(
@@ -40,17 +42,7 @@ public class BaseTest {
         options.setPageLoadTimeout(Duration.ofSeconds(120));
 
         Configuration.browserCapabilities = options;
-        Configuration.browserSize = "1920x1080";
-    }
-
-    /**
-     * Закрытие драйвера после тестов.
-     *
-     * <p>
-     * Автор: Вилков Андрей
-     * </p>
-     */
-    @AfterEach
-    void afterTest() {
+        open();
+        webdriver().object().manage().window().maximize();
     }
 }

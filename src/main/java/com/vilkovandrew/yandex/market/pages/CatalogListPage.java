@@ -160,8 +160,9 @@ public class CatalogListPage {
         filterElement.scrollIntoView(true);
         SelenideElement minValueField = filterElement.$(MIN_VALUE_RANGE_FILTER);
         SelenideElement maxValueField = filterElement.$(MAX_VALUE_RANGE_FILTER);
-
+        minValueField.click();
         minValueField.setValue(String.valueOf(minValue));
+        maxValueField.click();
         maxValueField.setValue(String.valueOf(maxValue));
 
         preloaderWait();
@@ -175,7 +176,7 @@ public class CatalogListPage {
      * </p>
      */
     private void preloaderWait() {
-        SelenideElement preloader = $(LOCATOR_PRELOADER).shouldBe(visible);
+        SelenideElement preloader = $(LOCATOR_PRELOADER).shouldBe(visible, ofSeconds(10));
         preloader.should(disappear, ofSeconds(20));
     }
 

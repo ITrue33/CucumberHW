@@ -19,5 +19,5 @@ public enum FilterType {
      * Автор: Вилков Андрей
      * </p>
      */
-    CHECKBOX;
+    CHECKBOX
 }
